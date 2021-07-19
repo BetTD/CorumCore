@@ -1,6 +1,7 @@
 name: CorumCore
-version: 1.0.0
+version: 1.0.2
 main: wtf.eugenio.corumcore.CorumCore
+depend: [TitleManager]
 commands:
   cc:
   vidas:

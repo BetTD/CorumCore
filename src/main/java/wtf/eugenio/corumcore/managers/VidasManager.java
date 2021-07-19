@@ -1,17 +1,14 @@
 package wtf.eugenio.corumcore.managers;
 
-import net.minecraft.server.v1_12_R1.ChatMessageType;
-import net.minecraft.server.v1_12_R1.IChatBaseComponent;
-import net.minecraft.server.v1_12_R1.PacketPlayOutChat;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import wtf.eugenio.corumcore.CorumCore;
+import io.puharesource.mc.titlemanager.api.v2.TitleManagerAPI;
 
 import java.io.File;
 import java.io.FileReader;
@@ -216,18 +213,13 @@ public class VidasManager {
 
             cSeconds--;
 
-            sendActionCountdown(String.valueOf(cHours), String.valueOf(cMinutes), String.valueOf(cSeconds));
+            sendActionCountdown(cHours, cMinutes, cSeconds);
         }, 0L, 20L);
     }
 
-    private static void sendActionCountdown(String hours, String minutes, String seconds) {
-        for (final Player player : Bukkit.getOnlinePlayers()) sendActionPacket(player, "§e§lSiguiente desafío: §f" + hours + ":" + minutes + ":" + seconds);
-    }
-
-    private static void sendActionPacket(Player player, String message) {
-        IChatBaseComponent chat = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + message + "\"}");
-        PacketPlayOutChat packetPlayOutChat = new PacketPlayOutChat(chat, ChatMessageType.GAME_INFO);
-        CraftPlayer craft = (CraftPlayer) player;
-        craft.getHandle().playerConnection.sendPacket(packetPlayOutChat);
+    private static void sendActionCountdown(int hours, int minutes, int seconds) {
+        TitleManagerAPI api = (TitleManagerAPI) Bukkit.getServer().getPluginManager().getPlugin("TitleManager");
+        String msg = "§e§lSiguiente desafío:§f " + String.format("%02d", hours) + ":" + String.format("%02d", minutes) + ":" + String.format("%02d", seconds);
+        for (final Player player : Bukkit.getOnlinePlayers()) api.sendActionbar(player, msg);
     }
 }
