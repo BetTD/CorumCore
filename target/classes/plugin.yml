@@ -1,0 +1,6 @@
+name: CorumCore
+version: 1.0.0
+main: wtf.eugenio.corumcore.CorumCore
+commands:
+  cc:
+  vidas:
