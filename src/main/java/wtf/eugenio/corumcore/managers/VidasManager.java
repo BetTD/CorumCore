@@ -10,7 +10,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import wtf.eugenio.corumcore.CorumCore;
-import io.puharesource.mc.titlemanager.api.v2.TitleManagerAPI;
 
 import java.io.File;
 import java.io.FileReader;
