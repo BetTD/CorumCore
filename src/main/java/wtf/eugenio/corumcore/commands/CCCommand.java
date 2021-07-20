@@ -8,9 +8,6 @@ import wtf.eugenio.corumcore.CorumCore;
 import wtf.eugenio.corumcore.managers.VidasManager;
 
 public class CCCommand implements CommandExecutor {
-    private final CorumCore plugin;
-    public CCCommand(CorumCore plugin) { this.plugin = plugin; }
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!sender.hasPermission("corum.admin")) {
@@ -18,7 +15,7 @@ public class CCCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length!=0) {
+        if (args.length != 0) {
             switch (args[0]) {
                 case "empezardesde0":
                     VidasManager.startFresh();
@@ -41,16 +38,16 @@ public class CCCommand implements CommandExecutor {
                     if (VidasManager.isCountdownRunning()) {
                         sender.sendMessage("§cLa cuenta atrás ya está activada.");
                     } else {
-                        VidasManager.startCosmeticCountdown(plugin.getConfig().getString("countdown-limit"));
+                        VidasManager.startCosmeticCountdown(CorumCore.getInstance().getConfig().getString("countdown-limit"));
                         sender.sendMessage("§aCuenta atrás activada.");
                     }
                     break;
                 case "recargar":
-                    plugin.reloadConfig();
+                    CorumCore.getInstance().reloadConfig();
                     sender.sendMessage("§aLa configuración ha sido recargada.");
                     if (VidasManager.isCountdownRunning()) {
                         VidasManager.stopCosmeticCountdown(true);
-                        VidasManager.startCosmeticCountdown(plugin.getConfig().getString("countdown-limit"));
+                        VidasManager.startCosmeticCountdown(CorumCore.getInstance().getConfig().getString("countdown-limit"));
                         sender.sendMessage("§aLa cuenta atrás también ha sido recargada para reflejar posibles cambios.");
                     }
                     break;
@@ -58,7 +55,6 @@ public class CCCommand implements CommandExecutor {
         } else {
             sender.sendMessage("§cUso: /cc <empezardesde0|salvarvida|endeardia|stopcountdown|startcountdown|recargar>");
         }
-
 
         return true;
     }

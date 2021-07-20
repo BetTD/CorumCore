@@ -185,6 +185,14 @@ public class VidasManager {
                 jsonObject.put("participants-undone-challenges", participantsList);
             }, 5L);
 
+            Bukkit.getScheduler().runTaskLater(CorumCore.getInstance(), () -> {
+                health.clear();
+
+                for (Object value : oneList) health.put(value.toString(), 1);
+                for (Object value : twoList) health.put(value.toString(), 2);
+                for (Object value : threeList) health.put(value.toString(), 3);
+            }, 100L);
+
             Bukkit.getConsoleSender().sendMessage("Hecho");
 
             try (FileWriter file = new FileWriter("./lifes.json")) {
