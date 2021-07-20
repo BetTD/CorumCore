@@ -30,20 +30,33 @@ public class CCCommand implements CommandExecutor {
                     VidasManager.endDay();
                     break;
                 case "stopcountdown":
-                    VidasManager.stopCosmeticCountdown(false);
-                    sender.sendMessage("§eCuenta atrás desactivada");
+                    if (VidasManager.isCountdownRunning()) {
+                        VidasManager.stopCosmeticCountdown(false);
+                        sender.sendMessage("§eCuenta atrás desactivada.");
+                    } else {
+                        sender.sendMessage("§cLa cuenta atrás ya está desactivada.");
+                    }
+                    break;
+                case "startcountdown":
+                    if (VidasManager.isCountdownRunning()) {
+                        sender.sendMessage("§cLa cuenta atrás ya está activada.");
+                    } else {
+                        VidasManager.startCosmeticCountdown(plugin.getConfig().getString("countdown-limit"));
+                        sender.sendMessage("§aCuenta atrás activada.");
+                    }
                     break;
                 case "recargar":
                     plugin.reloadConfig();
                     sender.sendMessage("§aLa configuración ha sido recargada.");
-                    if (Bukkit.getScheduler().isCurrentlyRunning(VidasManager.taskID)) {
+                    if (VidasManager.isCountdownRunning()) {
                         VidasManager.stopCosmeticCountdown(true);
                         VidasManager.startCosmeticCountdown(plugin.getConfig().getString("countdown-limit"));
                         sender.sendMessage("§aLa cuenta atrás también ha sido recargada para reflejar posibles cambios.");
                     }
+                    break;
             }
         } else {
-            sender.sendMessage("§cUso: /cc <empezardesde0|salvarvida|endeardia|stopcountdown|recargar>");
+            sender.sendMessage("§cUso: /cc <empezardesde0|salvarvida|endeardia|stopcountdown|startcountdown|recargar>");
         }
 
 
