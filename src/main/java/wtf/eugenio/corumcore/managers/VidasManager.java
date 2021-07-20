@@ -1,5 +1,7 @@
 package wtf.eugenio.corumcore.managers;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -8,25 +10,21 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import wtf.eugenio.corumcore.CorumCore;
-import io.puharesource.mc.titlemanager.api.v2.TitleManagerAPI;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.logging.Level;
 
 @SuppressWarnings({"unchecked"})
 public class VidasManager {
     public static File lifes;
 
     public static HashMap<String, Integer> health = new HashMap<>();
-
-    public static int cHours;
-    public static int cMinutes;
-    public static int cSeconds;
 
     public static void init() {
         lifes = new File("./lifes.json");
@@ -199,27 +197,38 @@ public class VidasManager {
         }
     }
 
-    public static void startCosmeticCountdown() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(CorumCore.getInstance(), () -> cHours--, 0L, 72000L);
+    public static int taskID;
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(CorumCore.getInstance(), () -> {
-            if (cMinutes <= 0) cMinutes = 59;
+    public static void startCosmeticCountdown(String limit) {
+        Date climit = new Date();
+        try {
+            climit = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(limit);
+        } catch (java.text.ParseException e) {
+            Bukkit.getLogger().log(Level.SEVERE, "Ha ocurrido un error al procesar la fecha límite establecida en la configuración para el countdown.\n"+e);
+        }
 
-            cMinutes--;
-        }, 0L, 1200L);
-
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(CorumCore.getInstance(), () -> {
-            if (cSeconds <= 0) cSeconds = 59;
-
-            cSeconds--;
-
-            sendActionCountdown(cHours, cMinutes, cSeconds);
+        Date finalClimit = climit;
+        taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(CorumCore.getInstance(), () -> {
+            long diff = finalClimit.getTime() - System.currentTimeMillis();
+            int s = (int) (diff / 1000) % 60 ;
+            int m = (int) ((diff / (1000*60)) % 60);
+            int h = (int) ((diff / (1000*60*60)) % 24);
+            String msg = "§e§lSiguiente desafío:§f " + String.format("%02d", h) + ":" + String.format("%02d", m) + ":" + String.format("%02d", s);
+            if (diff > 0) sendActionCountdown(msg);
+            else sendActionCountdown("§e§l¡Desafío terminado!§6 Pronto se anunciará otro desafío.");
         }, 0L, 20L);
     }
 
-    private static void sendActionCountdown(int hours, int minutes, int seconds) {
-        TitleManagerAPI api = (TitleManagerAPI) Bukkit.getServer().getPluginManager().getPlugin("TitleManager");
-        String msg = "§e§lSiguiente desafío:§f " + String.format("%02d", hours) + ":" + String.format("%02d", minutes) + ":" + String.format("%02d", seconds);
-        for (final Player player : Bukkit.getOnlinePlayers()) api.sendActionbar(player, msg);
+    public static void stopCosmeticCountdown(boolean silent) {
+        Bukkit.getScheduler().cancelTask(taskID);
+        if (!silent) sendActionCountdown("§c§lLa cuenta atrás ha sido desactivada.");
+    }
+
+    public static boolean isCountdownRunning() {
+        return Bukkit.getScheduler().isCurrentlyRunning(taskID) || Bukkit.getScheduler().isQueued(taskID);
+    }
+
+    private static void sendActionCountdown(String msg) {
+        for (final Player player : Bukkit.getOnlinePlayers()) player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(msg));
     }
 }

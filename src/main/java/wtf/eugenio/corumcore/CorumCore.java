@@ -13,19 +13,17 @@ public class CorumCore extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
+        saveDefaultConfig();
+
         VidasManager.init();
 
         registerComamnds();
 
-        VidasManager.cHours = 24;
-        VidasManager.cMinutes = 60;
-        VidasManager.cSeconds = 60;
-
-        VidasManager.startCosmeticCountdown();
+        VidasManager.startCosmeticCountdown(getConfig().getString("countdown-limit"));
     }
 
     private void registerComamnds() {
-        getCommand("cc").setExecutor(new CCCommand());
+        getCommand("cc").setExecutor(new CCCommand(this));
         getCommand("vidas").setExecutor(new VidasCommand());
     }
 }
