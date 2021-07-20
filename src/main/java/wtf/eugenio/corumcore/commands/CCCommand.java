@@ -8,6 +8,9 @@ import wtf.eugenio.corumcore.CorumCore;
 import wtf.eugenio.corumcore.managers.VidasManager;
 
 public class CCCommand implements CommandExecutor {
+    private final CorumCore plugin;
+    public CCCommand(CorumCore plugin) { this.plugin = plugin; }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!sender.hasPermission("corum.admin")) {
@@ -26,15 +29,21 @@ public class CCCommand implements CommandExecutor {
                 case "endeardia":
                     VidasManager.endDay();
                     break;
-                case "sethourctdwn":
-                    VidasManager.cHours = Integer.parseInt(args[1]);
-                case "setminctdwn":
-                    VidasManager.cMinutes = Integer.parseInt(args[1]);
-                case "setsecctdwn":
-                    VidasManager.cSeconds = Integer.parseInt(args[1]);
+                case "stopcountdown":
+                    VidasManager.stopCosmeticCountdown(false);
+                    sender.sendMessage("§eCuenta atrás desactivada");
+                    break;
+                case "recargar":
+                    plugin.reloadConfig();
+                    sender.sendMessage("§aLa configuración ha sido recargada.");
+                    if (Bukkit.getScheduler().isCurrentlyRunning(VidasManager.taskID)) {
+                        VidasManager.stopCosmeticCountdown(true);
+                        VidasManager.startCosmeticCountdown(plugin.getConfig().getString("countdown-limit"));
+                        sender.sendMessage("§aLa cuenta atrás también ha sido recargada para reflejar posibles cambios.");
+                    }
             }
         } else {
-            sender.sendMessage("§cUso: /cc <empezardesde0|salvarvida|endeardia|sethourctdwn|setminctdwn|setsecctdwn>");
+            sender.sendMessage("§cUso: /cc <empezardesde0|salvarvida|endeardia|stopcountdown|recargar>");
         }
 
 
