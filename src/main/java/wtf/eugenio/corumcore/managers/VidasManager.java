@@ -1,5 +1,7 @@
 package wtf.eugenio.corumcore.managers;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -223,8 +225,11 @@ public class VidasManager {
         if (!silent) sendActionCountdown("§c§lLa cuenta atrás ha sido desactivada.");
     }
 
+    public static boolean isCountdownRunning() {
+        return Bukkit.getScheduler().isCurrentlyRunning(taskID) || Bukkit.getScheduler().isQueued(taskID);
+    }
+
     private static void sendActionCountdown(String msg) {
-        TitleManagerAPI api = (TitleManagerAPI) Bukkit.getServer().getPluginManager().getPlugin("TitleManager");
-        for (final Player player : Bukkit.getOnlinePlayers()) api.sendActionbar(player, msg);
+        for (final Player player : Bukkit.getOnlinePlayers()) player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(msg));
     }
 }
