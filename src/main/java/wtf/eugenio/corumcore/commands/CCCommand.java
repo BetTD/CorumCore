@@ -7,6 +7,8 @@ import org.bukkit.command.CommandSender;
 import wtf.eugenio.corumcore.CorumCore;
 import wtf.eugenio.corumcore.managers.VidasManager;
 
+import java.util.Date;
+
 public class CCCommand implements CommandExecutor {
     private final CorumCore plugin;
     public CCCommand(CorumCore plugin) { this.plugin = plugin; }
@@ -41,18 +43,37 @@ public class CCCommand implements CommandExecutor {
                     if (VidasManager.isCountdownRunning()) {
                         sender.sendMessage("§cLa cuenta atrás ya está activada.");
                     } else {
-                        VidasManager.startCosmeticCountdown(plugin.getConfig().getString("countdown-limit"));
+                        VidasManager.startCosmeticCountdown();
                         sender.sendMessage("§aCuenta atrás activada.");
                     }
                     break;
+                case "ajustarcountdown":
+                    if (args[1] != null) {
+                        Object parsedDate = VidasManager.parseDate(args[1]);
+                        if (parsedDate.equals(false)) {
+                            sender.sendMessage("§cEl formato de la fecha es incorrecto.");
+                        } else {
+                            CorumCore.getInstance().getConfig().set("countdown-limit", args[1]);
+                            VidasManager.countdownlimit = (Date) parsedDate;
+                            VidasManager.startCosmeticCountdown();
+                        }
+                    } else {
+                        sender.sendMessage("§e§lUSO:§f /cc ajustarcountdown <fecha>" + "\n" + "§7§oFormato: dd/MM/yyyy HH:mm");
+                    }
+
+                    break;
+                case "reload":
                 case "recargar":
                     plugin.reloadConfig();
                     sender.sendMessage("§aLa configuración ha sido recargada.");
                     if (VidasManager.isCountdownRunning()) {
                         VidasManager.stopCosmeticCountdown(true);
-                        VidasManager.startCosmeticCountdown(plugin.getConfig().getString("countdown-limit"));
+                        VidasManager.startCosmeticCountdown();
                         sender.sendMessage("§aLa cuenta atrás también ha sido recargada para reflejar posibles cambios.");
                     }
+                    break;
+                default:
+                    sender.sendMessage("§cEste subcomando no existe, usa §l/cc§c para ver todos los subcomandos.");
                     break;
             }
         } else {

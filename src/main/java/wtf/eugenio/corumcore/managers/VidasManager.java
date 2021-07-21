@@ -199,17 +199,11 @@ public class VidasManager {
 
     public static int taskID;
 
-    public static void startCosmeticCountdown(String limit) {
-        Date climit = new Date();
-        try {
-            climit = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(limit);
-        } catch (java.text.ParseException e) {
-            Bukkit.getLogger().log(Level.SEVERE, "Ha ocurrido un error al procesar la fecha límite establecida en la configuración para el countdown.\n"+e);
-        }
+    public static Date countdownlimit;
 
-        Date finalClimit = climit;
+    public static void startCosmeticCountdown() {
         taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(CorumCore.getInstance(), () -> {
-            long diff = finalClimit.getTime() - System.currentTimeMillis();
+            long diff = countdownlimit.getTime() - System.currentTimeMillis();
             int s = (int) (diff / 1000) % 60 ;
             int m = (int) ((diff / (1000*60)) % 60);
             int h = (int) ((diff / (1000*60*60)) % 24);
@@ -230,5 +224,14 @@ public class VidasManager {
 
     private static void sendActionCountdown(String msg) {
         for (final Player player : Bukkit.getOnlinePlayers()) player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(msg));
+    }
+
+    public static Object parseDate(String date) {
+        try {
+            return new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(date);
+        } catch (java.text.ParseException e) {
+            Bukkit.getLogger().log(Level.SEVERE, "Ha ocurrido un error al procesar la fecha \"" + date + "\"\n"+e);
+            return false;
+        }
     }
 }
