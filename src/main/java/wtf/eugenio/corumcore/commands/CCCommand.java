@@ -18,6 +18,16 @@ public class CCCommand implements CommandExecutor {
             return true;
         }
 
+        String helpmsg = "§8§m         §r §f§lCORUMCORE§r §8§m         §r\n" +
+                "§f• /cc empezardesde0\n" +
+                "§f• /cc salvarvida\n" +
+                "§f• /cc endeardia\n" +
+                "§f• /cc stopcountdown\n" +
+                "§f• /cc startcountdown\n" +
+                "§f• /cc ajustarcountdown\n" +
+                "§f• /cc recargar|reload\n" +
+                "§8§m         §r §f§lCORUMCORE§r §8§m         §r";
+
         if (args.length != 0) {
             switch (args[0]) {
                 case "empezardesde0":
@@ -77,7 +87,7 @@ public class CCCommand implements CommandExecutor {
                     break;
             }
         } else {
-            sender.sendMessage("§cUso: /cc <empezardesde0|salvarvida|endeardia|stopcountdown|startcountdown|ajustarcountdown|recargar>");
+            sender.sendMessage(helpmsg);
         }
 
         return true;
