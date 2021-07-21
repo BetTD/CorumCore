@@ -55,7 +55,7 @@ public class CCCommand implements CommandExecutor {
                         if (parsedDate.equals(false)) {
                             sender.sendMessage("§cEl formato de la fecha es incorrecto.");
                         } else {
-                            CorumCore.getInstance().getConfig().set("countdown-limit", args[1]);
+                            CorumCore.getInstance().getConfig().set("countdown-limit", args[1] + " " + args[2]);
                             CorumCore.getInstance().saveConfig();
                             VidasManager.countdownlimit = (Date) parsedDate;
                             if (VidasManager.isCountdownRunning()) VidasManager.stopCosmeticCountdown(true);
