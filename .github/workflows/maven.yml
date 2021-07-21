@@ -37,5 +37,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2.2.2
         with:
-          name: LoboSkins
+          name: CorumCore
           path: ./target/CorumCore-${{ steps.project.outputs.version }}.jar
