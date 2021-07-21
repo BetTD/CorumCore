@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import wtf.eugenio.corumcore.CorumCore;
+import wtf.eugenio.corumcore.managers.CountdownManager;
 import wtf.eugenio.corumcore.managers.VidasManager;
 
 import java.util.Date;
@@ -29,33 +30,33 @@ public class CCCommand implements CommandExecutor {
                     VidasManager.endDay();
                     break;
                 case "stopcountdown":
-                    if (VidasManager.isCountdownRunning()) {
-                        VidasManager.stopCosmeticCountdown(false);
+                    if (CountdownManager.isCountdownRunning()) {
+                        CountdownManager.stopCosmeticCountdown(false);
                         sender.sendMessage("§eCuenta atrás desactivada.");
                     } else {
                         sender.sendMessage("§cLa cuenta atrás ya está desactivada.");
                     }
                     break;
                 case "startcountdown":
-                    if (VidasManager.isCountdownRunning()) {
+                    if (CountdownManager.isCountdownRunning()) {
                         sender.sendMessage("§cLa cuenta atrás ya está activada.");
                     } else {
-                        VidasManager.startCosmeticCountdown();
+                        CountdownManager.startCosmeticCountdown();
 
                         sender.sendMessage("§aCuenta atrás activada.");
                     }
                     break;
                 case "ajustarcountdown":
                     if (args.length == 3) {
-                        Object parsedDate = VidasManager.parseDate(args[1] + " " + args[2]);
+                        Object parsedDate = CountdownManager.parseDate(args[1] + " " + args[2]);
                         if (parsedDate.equals(false)) {
                             sender.sendMessage("§cEl formato de la fecha es incorrecto.");
                         } else {
                             CorumCore.getInstance().getConfig().set("countdown-limit", args[1] + " " + args[2]);
                             CorumCore.getInstance().saveConfig();
-                            VidasManager.countdownlimit = (Date) parsedDate;
-                            if (VidasManager.isCountdownRunning()) VidasManager.stopCosmeticCountdown(true);
-                            VidasManager.startCosmeticCountdown();
+                            CountdownManager.countdownlimit = (Date) parsedDate;
+                            if (CountdownManager.isCountdownRunning()) CountdownManager.stopCosmeticCountdown(true);
+                            CountdownManager.startCosmeticCountdown();
                         }
                     } else {
                         sender.sendMessage("§e§lUSO:§f /cc ajustarcountdown <fecha>" + "\n" + "§7§oFormato: dd/MM/yyyy HH:mm");
@@ -65,9 +66,9 @@ public class CCCommand implements CommandExecutor {
                 case "recargar":
                     CorumCore.getInstance().reloadConfig();
                     sender.sendMessage("§aLa configuración ha sido recargada.");
-                    if (VidasManager.isCountdownRunning()) {
-                        VidasManager.stopCosmeticCountdown(true);
-                        VidasManager.startCosmeticCountdown();
+                    if (CountdownManager.isCountdownRunning()) {
+                        CountdownManager.stopCosmeticCountdown(true);
+                        CountdownManager.startCosmeticCountdown();
                         sender.sendMessage("§aLa cuenta atrás también ha sido recargada para reflejar posibles cambios.");
                     }
                     break;
