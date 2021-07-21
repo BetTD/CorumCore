@@ -4,10 +4,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import wtf.eugenio.corumcore.CorumCore;
 import wtf.eugenio.corumcore.managers.VidasManager;
 
 import java.util.Date;
+import java.util.logging.Level;
 
 public class CCCommand implements CommandExecutor {
     private final CorumCore plugin;
@@ -54,13 +56,14 @@ public class CCCommand implements CommandExecutor {
                             sender.sendMessage("§cEl formato de la fecha es incorrecto.");
                         } else {
                             CorumCore.getInstance().getConfig().set("countdown-limit", args[1]);
+                            CorumCore.getInstance().saveConfig();
                             VidasManager.countdownlimit = (Date) parsedDate;
+                            if (VidasManager.isCountdownRunning()) VidasManager.stopCosmeticCountdown(true);
                             VidasManager.startCosmeticCountdown();
                         }
                     } else {
                         sender.sendMessage("§e§lUSO:§f /cc ajustarcountdown <fecha>" + "\n" + "§7§oFormato: dd/MM/yyyy HH:mm");
                     }
-
                     break;
                 case "reload":
                 case "recargar":
