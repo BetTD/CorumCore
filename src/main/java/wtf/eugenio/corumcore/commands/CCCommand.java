@@ -48,8 +48,8 @@ public class CCCommand implements CommandExecutor {
                     }
                     break;
                 case "ajustarcountdown":
-                    if (args[1] != null) {
-                        Object parsedDate = VidasManager.parseDate(args[1]);
+                    if (args.length == 3) {
+                        Object parsedDate = VidasManager.parseDate(args[1] + " " + args[2]);
                         if (parsedDate.equals(false)) {
                             sender.sendMessage("§cEl formato de la fecha es incorrecto.");
                         } else {
