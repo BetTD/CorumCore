@@ -80,7 +80,7 @@ public class CCCommand implements CommandExecutor {
                     break;
             }
         } else {
-            sender.sendMessage("§cUso: /cc <empezardesde0|salvarvida|endeardia|stopcountdown|startcountdown|recargar>");
+            sender.sendMessage("§cUso: /cc <empezardesde0|salvarvida|endeardia|stopcountdown|startcountdown|ajustarcountdown|recargar>");
         }
 
 
