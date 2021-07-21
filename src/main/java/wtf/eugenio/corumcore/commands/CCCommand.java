@@ -4,12 +4,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import wtf.eugenio.corumcore.CorumCore;
 import wtf.eugenio.corumcore.managers.VidasManager;
 
 import java.util.Date;
-import java.util.logging.Level;
 
 public class CCCommand implements CommandExecutor {
     @Override
