@@ -19,6 +19,7 @@ public class CCCommand implements CommandExecutor {
         }
 
         String helpmsg = "§8§m         §r §f§lCORUMCORE§r §8§m         §r\n" +
+                "§7§oCorumCore versión "+ CorumCore.getInstance().getDescription().getVersion() +
                 "§f• /cc empezardesde0\n" +
                 "§f• /cc salvarvida\n" +
                 "§f• /cc endeardia\n" +
