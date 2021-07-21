@@ -31,7 +31,7 @@ public class CorumCore extends JavaPlugin {
     }
 
     private void registerComamnds() {
-        getCommand("cc").setExecutor(new CCCommand(this));
+        getCommand("cc").setExecutor(new CCCommand());
         getCommand("vidas").setExecutor(new VidasCommand());
     }
 }

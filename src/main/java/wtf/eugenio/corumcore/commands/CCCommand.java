@@ -12,9 +12,6 @@ import java.util.Date;
 import java.util.logging.Level;
 
 public class CCCommand implements CommandExecutor {
-    private final CorumCore plugin;
-    public CCCommand(CorumCore plugin) { this.plugin = plugin; }
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!sender.hasPermission("corum.admin")) {
@@ -22,7 +19,7 @@ public class CCCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length!=0) {
+        if (args.length != 0) {
             switch (args[0]) {
                 case "empezardesde0":
                     VidasManager.startFresh();
@@ -46,6 +43,7 @@ public class CCCommand implements CommandExecutor {
                         sender.sendMessage("§cLa cuenta atrás ya está activada.");
                     } else {
                         VidasManager.startCosmeticCountdown();
+
                         sender.sendMessage("§aCuenta atrás activada.");
                     }
                     break;
@@ -67,7 +65,7 @@ public class CCCommand implements CommandExecutor {
                     break;
                 case "reload":
                 case "recargar":
-                    plugin.reloadConfig();
+                    CorumCore.getInstance().reloadConfig();
                     sender.sendMessage("§aLa configuración ha sido recargada.");
                     if (VidasManager.isCountdownRunning()) {
                         VidasManager.stopCosmeticCountdown(true);
@@ -82,7 +80,6 @@ public class CCCommand implements CommandExecutor {
         } else {
             sender.sendMessage("§cUso: /cc <empezardesde0|salvarvida|endeardia|stopcountdown|startcountdown|ajustarcountdown|recargar>");
         }
-
 
         return true;
     }
