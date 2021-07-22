@@ -9,6 +9,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class DiscordManager {
     public static void sendStartWebhook() {
@@ -27,6 +31,8 @@ public class DiscordManager {
             e.printStackTrace();
         }
         try {
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            String timestamp = df.format(new Date());
             assert webhooklink != null;
             HttpURLConnection http = (HttpURLConnection) webhooklink.openConnection();
             http.addRequestProperty("Content-Type", "application/json");
@@ -39,9 +45,11 @@ public class DiscordManager {
             obj.put("avatar", "https://i.de.5sm.online/e7bbc0b5592b59e744db25547e731537.webp");
 
             JSONObject objEmbed = new JSONObject();
-            objEmbed.put("title", msg);
-            objEmbed.put("description", "");
+            objEmbed.put("type", "rich");
+            objEmbed.put("title", "Cambio de estado");
+            objEmbed.put("description", msg);
             objEmbed.put("color", color);
+            objEmbed.put("timestamp", timestamp);
             objEmbed.put("footer", new JSONObject().put("text", "corum.lobosarcraft.com"));
 
             obj.put("embeds", objEmbed);
