@@ -66,8 +66,6 @@ public class VidasManager {
 
             object.put("participants-threeheart", listThreeheart);
 
-            for (Object value : listUndone) undoneChallenges.add(value.toString());
-
             try (FileWriter file = new FileWriter("./lifes.json")) {
                 file.write(object.toJSONString());
             } catch (IOException exception) {
@@ -93,6 +91,9 @@ public class VidasManager {
 
             JSONArray threeList = (JSONArray) jsonObject.get("participants-threeheart");
             for (Object value : threeList) health.put(value.toString(), 3);
+
+            JSONArray listUndone = (JSONArray) jsonObject.get("participants-undone-challenges");
+            for (Object value : listUndone) undoneChallenges.add(value.toString());
         } catch (IOException | ParseException exception) {
             throw new RuntimeException("Error al leer o parsear el archivo lifes.json. Excepción: " + exception);
         }
