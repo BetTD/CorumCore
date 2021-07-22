@@ -13,15 +13,14 @@ import org.bukkit.metadata.MetadataValue;
 public class EventListener implements Listener {
     // Sí, he usado ChatColor, lo siento Eugenio, pero me daba pereza reemplazar todos los & por §
     FileConfiguration config = CorumCore.getInstance().getConfig();
-    String joinMsg = ChatColor.translateAlternateColorCodes('&', config.getString("joinleave.join-message"));
-    String leaveMsg = ChatColor.translateAlternateColorCodes('&', config.getString("joinleave.leave-message"));
-    int motdNewlines = config.getInt("joinleave.join-motd-newlines");
-    String motdMsg = ChatColor.translateAlternateColorCodes('&', config.getString("joinleave.join-motd-message"));
 
     // No debería dejar así el código, debería poner un caso else para que no envíe el mensaje si está en vanish, pero
     // de eso ya se encarga SuperVanish, así que... supongo que así nos sirve.
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
+        String joinMsg = ChatColor.translateAlternateColorCodes('&', config.getString("joinleave.join-message"));
+        int motdNewlines = config.getInt("joinleave.join-motd-newlines");
+        String motdMsg = ChatColor.translateAlternateColorCodes('&', config.getString("joinleave.join-motd-message"));
         Player p = e.getPlayer();
         if (!isVanished(p)) {
             joinMsg = joinMsg.replace("{PLAYER}", p.getName());
@@ -35,13 +34,12 @@ public class EventListener implements Listener {
         motdMsg = motdMsg.replace("{PLAYER}", p.getName());
         motd.append(motdMsg);
 
-        Bukkit.getScheduler().runTaskLater(CorumCore.getInstance(), () -> {
-            p.sendMessage(motd.toString());
-        }, 20L);
+        Bukkit.getScheduler().runTaskLater(CorumCore.getInstance(), () -> p.sendMessage(motd.toString()), 20L);
     }
 
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent e) {
+        String leaveMsg = ChatColor.translateAlternateColorCodes('&', config.getString("joinleave.leave-message"));
         Player p = e.getPlayer();
         if (!isVanished(p)) {
             leaveMsg = leaveMsg.replace("{PLAYER}", p.getName());
