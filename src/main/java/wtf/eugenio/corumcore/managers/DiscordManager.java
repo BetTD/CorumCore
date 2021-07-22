@@ -12,18 +12,17 @@ import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
 public class DiscordManager {
     public static void sendStartWebhook() {
-        sendWebhook("**El servidor se ha iniciado.**", "#15ed56");
+        sendWebhook("**El servidor se ha iniciado.**", 1437014);
     }
 
     public static void sendStoppingWebhook() {
-        sendWebhook("**El servidor se está apagando.**", "#ed281a");
+        sendWebhook("**El servidor se está apagando.**", 15542298);
     }
 
-    private static void sendWebhook(String msg, String color) {
+    private static void sendWebhook(String msg, int color) {
         URL webhooklink = null;
         try {
             webhooklink = new URL(CorumCore.getInstance().getConfig().getString("webhook-url"));
