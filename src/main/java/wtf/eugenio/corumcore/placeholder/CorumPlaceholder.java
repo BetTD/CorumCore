@@ -35,7 +35,7 @@ public class CorumPlaceholder extends PlaceholderExpansion {
                     System.out.println(CorumCore.getInstance().getSettings().challenge);
                     return CorumCore.getInstance().getSettings().challenge;
                 } else {
-                    return "§a¡Hecho!";
+                    return "§a¡Completado!";
                 }
             case "vidas":
                 if (VidasManager.health.containsKey(player.getPlayer().getName())) {
