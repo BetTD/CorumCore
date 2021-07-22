@@ -21,7 +21,7 @@ public class CorumCore extends JavaPlugin {
         saveDefaultConfig();
 
         VidasManager.init();
-        registerComamnds();
+        registerStuff();
         Object parsedDate = CountdownManager.parseDate(getConfig().getString("countdown-limit"));
         if (parsedDate.equals(false)) {
             Bukkit.getLogger().log(Level.WARNING, "No fue posible parsear la fecha, así que el countdown no ha sido activado.");
@@ -31,8 +31,9 @@ public class CorumCore extends JavaPlugin {
         }
     }
 
-    private void registerComamnds() {
+    private void registerStuff() {
         getCommand("cc").setExecutor(new CCCommand());
         getCommand("vidas").setExecutor(new VidasCommand());
+        getServer().getPluginManager().registerEvents(new EventListener(), this);
     }
 }
