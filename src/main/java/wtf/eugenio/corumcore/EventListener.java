@@ -32,6 +32,7 @@ public class EventListener implements Listener {
         for (int i = 0; i < motdNewlines; i++) {
             motd.append("\n");
         }
+        motdMsg = motdMsg.replace("{PLAYER}", p.getName());
         motd.append(motdMsg);
 
         Bukkit.getScheduler().runTaskLater(CorumCore.getInstance(), () -> {
