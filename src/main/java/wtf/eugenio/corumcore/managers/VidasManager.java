@@ -5,6 +5,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+// TODO Actualizar a la nueva librería JSON incluída en el pom.xml
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
