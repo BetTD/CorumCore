@@ -5,8 +5,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import wtf.eugenio.corumcore.CorumCore;
 
 public class Settings {
-    FileConfiguration config = CorumCore.getInstance().getConfig();
-
     public String joinMessage;
     public int motdLines;
     public String joinMotd;
@@ -18,14 +16,14 @@ public class Settings {
     public String webhookURL;
 
     public void initializeMessages() {
-        joinMessage = ChatColor.translateAlternateColorCodes('&', config.getString("joinleave.join-message"));
+        joinMessage = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("joinleave.join-message"));
         motdLines = CorumCore.getInstance().getConfig().getInt("joinleave.join-motd-newlines");
-        joinMotd = ChatColor.translateAlternateColorCodes('&', config.getString("joinleave.join-motd-message"));
+        joinMotd = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("joinleave.join-motd-message"));
         // *------*
-        leaveMessage = ChatColor.translateAlternateColorCodes('&', config.getString("joinleave.leave-message"));
+        leaveMessage = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("joinleave.leave-message"));
         // *------*
-        challenge = ChatColor.translateAlternateColorCodes('&', config.getString("challenge"));
+        challenge = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("challenge"));
         // *------*
-        webhookURL = config.getString("webhook-url");
+        webhookURL = CorumCore.getInstance().getConfig().getString("webhook-url");
     }
 }
