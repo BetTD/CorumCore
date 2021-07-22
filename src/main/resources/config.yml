@@ -16,3 +16,7 @@ joinleave:
 
 # Enlace del webhook
 webhook-url: "https://example.com"
+
+# Desafío
+challenge: |-
+  &8- &ax1 Tierra

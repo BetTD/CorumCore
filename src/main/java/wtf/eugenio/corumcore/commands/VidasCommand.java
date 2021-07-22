@@ -9,7 +9,7 @@ import wtf.eugenio.corumcore.managers.VidasManager;
 public class VidasCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (sender instanceof Player) sender.sendMessage("§eAhora mismo tienes §c" + VidasManager.health.get(sender.getName()) + " vidas.");
+        if (sender instanceof Player) sender.sendMessage("§eAhora mismo tienes §c" + VidasManager.getLifes(((Player) sender).getPlayer()) + " vidas.");
         return false;
     }
 }

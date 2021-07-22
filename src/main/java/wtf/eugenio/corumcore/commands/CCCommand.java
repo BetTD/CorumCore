@@ -76,6 +76,7 @@ public class CCCommand implements CommandExecutor {
                 case "reload":
                 case "recargar":
                     CorumCore.getInstance().reloadConfig();
+                    CorumCore.getInstance().getSettings().initializeMessages();
                     sender.sendMessage("§aLa configuración ha sido recargada.");
                     if (CountdownManager.isCountdownRunning()) {
                         CountdownManager.stopCosmeticCountdown(true);
