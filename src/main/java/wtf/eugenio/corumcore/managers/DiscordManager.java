@@ -11,7 +11,9 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DiscordManager {
     public static void sendStartWebhook() {
@@ -43,6 +45,7 @@ public class DiscordManager {
             obj.put("username", "Corum");
             obj.put("avatar", "https://i.de.5sm.online/e7bbc0b5592b59e744db25547e731537.webp");
 
+            List<JSONObject> embeds = new ArrayList<>();
             JSONObject objEmbed = new JSONObject();
             objEmbed.put("type", "rich");
             objEmbed.put("title", "Cambio de estado");
@@ -50,8 +53,9 @@ public class DiscordManager {
             objEmbed.put("color", color);
             objEmbed.put("timestamp", timestamp);
             objEmbed.put("footer", new JSONObject().put("text", "corum.lobosarcraft.com"));
+            embeds.add(objEmbed);
 
-            obj.put("embeds", objEmbed);
+            obj.put("embeds", embeds);
 
             OutputStream out = http.getOutputStream();
             out.write(obj.toString().getBytes(StandardCharsets.UTF_8));
