@@ -1,5 +1,6 @@
 package wtf.eugenio.corumcore;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -26,12 +27,16 @@ public class EventListener implements Listener {
             joinMsg = joinMsg.replace("{PLAYER}", p.getName());
             e.setJoinMessage(joinMsg);
         }
+
         StringBuilder motd = new StringBuilder();
         for (int i = 0; i < motdNewlines; i++) {
             motd.append("\n");
         }
         motd.append(motdMsg);
-        p.sendMessage(motd.toString());
+
+        Bukkit.getScheduler().runTaskLater(CorumCore.getInstance(), () -> {
+            p.sendMessage(motd.toString());
+        }, 20L);
     }
 
     @EventHandler
