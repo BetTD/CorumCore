@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class DiscordManager {
     public static void sendStartWebhook() {
@@ -33,6 +34,7 @@ public class DiscordManager {
         }
         try {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            df.setTimeZone(TimeZone.getTimeZone("UTC"));
             String timestamp = df.format(new Date());
             assert webhooklink != null;
             HttpURLConnection http = (HttpURLConnection) webhooklink.openConnection();
