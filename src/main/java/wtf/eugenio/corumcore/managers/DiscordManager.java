@@ -37,13 +37,14 @@ public class DiscordManager {
             JSONObject obj = new JSONObject();
             obj.put("username", "Corum");
             obj.put("avatar", "https://i.de.5sm.online/e7bbc0b5592b59e744db25547e731537.webp");
-            obj.put("content", "");
 
             JSONObject objEmbed = new JSONObject();
             objEmbed.put("title", msg);
             objEmbed.put("description", "");
             objEmbed.put("color", color);
             objEmbed.put("footer", new JSONObject().put("text", "corum.lobosarcraft.com"));
+
+            obj.put("embeds", objEmbed);
 
             OutputStream out = http.getOutputStream();
             out.write(obj.toString().getBytes(StandardCharsets.UTF_8));
