@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import wtf.eugenio.corumcore.commands.CCCommand;
 import wtf.eugenio.corumcore.commands.VidasCommand;
 import wtf.eugenio.corumcore.managers.CountdownManager;
+import wtf.eugenio.corumcore.managers.DiscordManager;
 import wtf.eugenio.corumcore.managers.VidasManager;
 
 import java.util.Date;
@@ -29,6 +30,12 @@ public class CorumCore extends JavaPlugin {
             CountdownManager.countdownlimit = (Date) parsedDate;
             CountdownManager.startCosmeticCountdown();
         }
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, DiscordManager::sendStartWebhook);
+    }
+
+    public void onDisable() {
+        DiscordManager.sendStoppingWebhook();
     }
 
     private void registerStuff() {
