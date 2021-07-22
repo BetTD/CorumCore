@@ -1,7 +1,5 @@
 package wtf.eugenio.corumcore.managers;
 
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -15,16 +13,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.logging.Level;
+import java.util.List;
 
 @SuppressWarnings({"unchecked"})
 public class VidasManager {
     public static File lifes;
 
     public static HashMap<String, Integer> health = new HashMap<>();
+    public static List<String> undoneChallenges = new ArrayList<>();
 
     public static void init() {
         lifes = new File("./lifes.json");
@@ -65,6 +64,8 @@ public class VidasManager {
             listThreeheart.add("test");
 
             object.put("participants-threeheart", listThreeheart);
+
+            for (Object value : listUndone) undoneChallenges.add(value.toString());
 
             try (FileWriter file = new FileWriter("./lifes.json")) {
                 file.write(object.toJSONString());
@@ -131,6 +132,8 @@ public class VidasManager {
             undoneList.remove(name);
 
             jsonObject.put("participants-undone-challenges", undoneList);
+
+            undoneChallenges.remove(name);
 
             Bukkit.getConsoleSender().sendMessage("Salvado a " + name);
 
@@ -203,5 +206,9 @@ public class VidasManager {
         } catch (IOException | ParseException exception) {
             throw new RuntimeException("Error al leer o parsear el archivo lifes.json. Excepción: " + exception);
         }
+    }
+
+    public static int getLifes(Player player) {
+        return VidasManager.health.get(player.getName());
     }
 }
