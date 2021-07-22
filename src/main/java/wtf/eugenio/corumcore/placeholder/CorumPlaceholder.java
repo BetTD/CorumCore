@@ -8,24 +8,16 @@ import wtf.eugenio.corumcore.managers.VidasManager;
 
 public class CorumPlaceholder extends PlaceholderExpansion {
     @Override
-    public @NotNull String getAuthor() {
-        return "Corum";
-    }
+    public @NotNull String getAuthor() { return "Corum"; }
 
     @Override
-    public @NotNull String getIdentifier() {
-        return "corum";
-    }
+    public @NotNull String getIdentifier() { return "corum"; }
 
     @Override
-    public @NotNull String getVersion() {
-        return "1.0.0";
-    }
+    public @NotNull String getVersion() { return "1.0.0"; }
 
     @Override
-    public boolean persist() {
-        return true;
-    }
+    public boolean persist() { return true; }
 
     @Override
     public String onRequest(OfflinePlayer player, String params) {
@@ -33,7 +25,11 @@ public class CorumPlaceholder extends PlaceholderExpansion {
             case "desafio":
                 if (VidasManager.undoneChallenges.contains(player.getPlayer().getName())) {
                     System.out.println(CorumCore.getInstance().getSettings().challenge);
-                    return CorumCore.getInstance().getSettings().challenge;
+                    StringBuilder challenge = new StringBuilder();
+                    for (String string : CorumCore.getInstance().getSettings().challenge) {
+                        challenge.append(string).append("\n");
+                    }
+                    return challenge.toString();
                 } else {
                     return "§a¡Completado!";
                 }

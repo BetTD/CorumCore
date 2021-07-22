@@ -4,6 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import wtf.eugenio.corumcore.CorumCore;
 
+import java.util.List;
+
 public class Settings {
     public String joinMessage;
     public int motdLines;
@@ -11,7 +13,7 @@ public class Settings {
     // *------*
     public String leaveMessage;
     // *------*
-    public String challenge;
+    public List<String> challenge;
     // *------*
     public String webhookURL;
 
@@ -22,7 +24,7 @@ public class Settings {
         // *------*
         leaveMessage = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("joinleave.leave-message"));
         // *------*
-        challenge = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("challenge"));
+        challenge = CorumCore.getInstance().getConfig().getStringList("challenge");
         // *------*
         webhookURL = CorumCore.getInstance().getConfig().getString("webhook-url");
     }

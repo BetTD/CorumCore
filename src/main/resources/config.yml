@@ -18,5 +18,5 @@ joinleave:
 webhook-url: "https://example.com"
 
 # Desafío
-challenge: |-
-  &8- &ax1 Tierra
+challenge:
+  - "&8- &ax1 Tierra"
