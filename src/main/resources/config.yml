@@ -6,3 +6,8 @@
 # Límite del countdown, es decir, hasta cuándo contará. Hora en formato 24h.
 # Formato: dd/MM/yyyy HH:mm (por ejemplo: 31/03/2022 23:59
 countdown-limit: "31/03/2022 23:59"
+
+# Mensajes de join y leave
+joinleave:
+  join-message: "&8[&a+&8] &7{PLAYER}"
+  leave-message: "&8[&c-&8] &7{PLAYER}"
