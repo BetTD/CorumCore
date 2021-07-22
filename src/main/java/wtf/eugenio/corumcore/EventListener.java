@@ -13,6 +13,9 @@ public class EventListener implements Listener {
     // Sí, he usado ChatColor, lo siento Eugenio, pero me daba pereza reemplazar todos los & por §
     String joinMsg = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("joinleave.join-message"));
     String leaveMsg = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("joinleave.leave-message"));
+
+    // No debería dejar así el código, debería poner un caso else para que no envíe el mensaje si está en vanish, pero
+    // de eso ya se encarga SuperVanish, así que... supongo que así nos sirve.
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
