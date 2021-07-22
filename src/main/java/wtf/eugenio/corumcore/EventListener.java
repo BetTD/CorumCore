@@ -1,6 +1,7 @@
 package wtf.eugenio.corumcore;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
@@ -9,16 +10,25 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.MetadataValue;
 
 public class EventListener implements Listener {
+    // Sí, he usado ChatColor, lo siento Eugenio, pero me daba pereza reemplazar todos los & por §
+    String joinMsg = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("joinleave.join-message"));
+    String leaveMsg = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("joinleave.leave-message"));
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        if (!isVanished(p)) e.setJoinMessage("§8[§a+§8] §7" + p.getName());
+        if (!isVanished(p)) {
+            joinMsg = joinMsg.replace("{PLAYER}", p.getName());
+            e.setJoinMessage(joinMsg);
+        }
     }
 
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent e) {
         Player p = e.getPlayer();
-        if (!isVanished(p)) e.setQuitMessage("§8[§c-§8] §7" + p.getName());
+        if (!isVanished(p)) {
+            leaveMsg = leaveMsg.replace("{PLAYER}", p.getName());
+            e.setQuitMessage(leaveMsg);
+        }
     }
 
     // Code from https://www.spigotmc.org/resources/supervanish-be-invisible.1331/
