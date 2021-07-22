@@ -2,6 +2,7 @@ package wtf.eugenio.corumcore;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
@@ -11,8 +12,11 @@ import org.bukkit.metadata.MetadataValue;
 
 public class EventListener implements Listener {
     // Sí, he usado ChatColor, lo siento Eugenio, pero me daba pereza reemplazar todos los & por §
-    String joinMsg = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("joinleave.join-message"));
-    String leaveMsg = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("joinleave.leave-message"));
+    FileConfiguration config = CorumCore.getInstance().getConfig();
+    String joinMsg = ChatColor.translateAlternateColorCodes('&', config.getString("joinleave.join-message"));
+    String leaveMsg = ChatColor.translateAlternateColorCodes('&', config.getString("joinleave.leave-message"));
+    int motdNewlines = config.getInt("joinleave.join-motd-newlines");
+    String motdMsg = ChatColor.translateAlternateColorCodes('&', config.getString("joinleave.join-motd-message"));
 
     // No debería dejar así el código, debería poner un caso else para que no envíe el mensaje si está en vanish, pero
     // de eso ya se encarga SuperVanish, así que... supongo que así nos sirve.
@@ -23,6 +27,12 @@ public class EventListener implements Listener {
             joinMsg = joinMsg.replace("{PLAYER}", p.getName());
             e.setJoinMessage(joinMsg);
         }
+        StringBuilder motd = new StringBuilder();
+        for (int i = 0; i < motdNewlines; i++) {
+            motd.append("\n");
+        }
+        motd.append(motdMsg);
+        p.sendMessage(motd.toString());
     }
 
     @EventHandler
