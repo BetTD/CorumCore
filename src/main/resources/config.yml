@@ -14,6 +14,9 @@ joinleave:
   join-motd-newlines: 10
   join-motd-message: "&a&l¡Bienvenid@ de nuevo a Corum, {PLAYER}!"
 
+# Enlace del webhook
+webhook-url: "https://example.com"
+
 # Desafío
 challenge: |-
   &8- &ax1 Tierra
