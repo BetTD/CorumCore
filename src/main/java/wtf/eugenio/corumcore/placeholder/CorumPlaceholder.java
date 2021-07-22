@@ -39,11 +39,10 @@ public class CorumPlaceholder extends PlaceholderExpansion {
                 }
             case "vidas":
                 if (VidasManager.health.containsKey(player.getPlayer().getName())) {
-                    VidasManager.getLifes(player.getPlayer());
+                    return String.valueOf(VidasManager.getLifes(player.getPlayer()));
                 } else {
                     return "§cSin vidas";
                 }
-                break;
         }
 
         return null;
