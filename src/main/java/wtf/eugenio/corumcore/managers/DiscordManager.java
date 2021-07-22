@@ -12,14 +12,14 @@ import java.nio.charset.StandardCharsets;
 
 public class DiscordManager {
     public static void sendStartWebhook() {
-        sendWebhook("**El servidor se ha iniciado.**");
+        sendWebhook("**El servidor se ha iniciado.**", "#15ed56");
     }
 
     public static void sendStoppingWebhook() {
-        sendWebhook("**El servidor se está apagando.**");
+        sendWebhook("**El servidor se está apagando.**", "#ed281a");
     }
 
-    private static void sendWebhook(String msg) {
+    private static void sendWebhook(String msg, String color) {
         URL webhooklink = null;
         try {
             webhooklink = new URL(CorumCore.getInstance().getConfig().getString("webhook-url"));
@@ -36,8 +36,14 @@ public class DiscordManager {
 
             JSONObject obj = new JSONObject();
             obj.put("username", "Corum");
-            obj.put("avatar", "https://cdn.discordapp.com/icons/863869756763275275/e7bbc0b5592b59e744db25547e731537.webp?size=256");
-            obj.put("content", msg);
+            obj.put("avatar", "https://i.de.5sm.online/e7bbc0b5592b59e744db25547e731537.webp");
+            obj.put("content", "");
+
+            JSONObject objEmbed = new JSONObject();
+            objEmbed.put("title", msg);
+            objEmbed.put("description", "");
+            objEmbed.put("color", color);
+            objEmbed.put("footer", new JSONObject().put("text", "corum.lobosarcraft.com"));
 
             OutputStream out = http.getOutputStream();
             out.write(obj.toString().getBytes(StandardCharsets.UTF_8));
