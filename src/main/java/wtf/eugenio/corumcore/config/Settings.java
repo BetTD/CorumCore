@@ -5,7 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import wtf.eugenio.corumcore.CorumCore;
 
 public class Settings {
-    private final FileConfiguration config = CorumCore.getInstance().getConfig();
+    FileConfiguration config = CorumCore.getInstance().getConfig();
 
     public String joinMessage;
     public int motdLines;

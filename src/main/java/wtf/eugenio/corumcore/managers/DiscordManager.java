@@ -28,7 +28,7 @@ public class DiscordManager {
     private static void sendWebhook(String msg, int color) {
         URL webhooklink = null;
         try {
-            webhooklink = new URL(CorumCore.getInstance().getConfig().getString("webhook-url"));
+            webhooklink = new URL(CorumCore.getInstance().getSettings().webhookURL);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
