@@ -32,7 +32,7 @@ public class CorumPlaceholder extends PlaceholderExpansion {
         switch (params) {
             case "desafio":
                 if (VidasManager.undoneChallenges.contains(player.getPlayer().getName())) {
-                    if (CorumCore.getInstance().getSettings().challege != null) return CorumCore.getInstance().getSettings().challege;
+                    if (CorumCore.getInstance().getSettings().challenge != null) return CorumCore.getInstance().getSettings().challenge;
                 } else {
                     return "§a¡Completado!";
                 }

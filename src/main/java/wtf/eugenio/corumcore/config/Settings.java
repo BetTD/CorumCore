@@ -10,7 +10,7 @@ public class Settings {
     // *------*
     public String leaveMessage;
     // *------*
-    public String challege;
+    public String challenge;
 
     public void initializeMessages() {
         joinMessage = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("joinleave.join-message"));
@@ -19,6 +19,6 @@ public class Settings {
         // *------*
         leaveMessage = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("joinleave.leave-message"));
         // *------*
-        challege = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("challenge"));
+        challenge = ChatColor.translateAlternateColorCodes('&', CorumCore.getInstance().getConfig().getString("challenge"));
     }
 }
