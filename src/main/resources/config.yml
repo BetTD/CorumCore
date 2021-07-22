@@ -13,3 +13,6 @@ joinleave:
   leave-message: "&8[&c-&8] &7{PLAYER}"
   join-motd-newlines: 10
   join-motd-message: "&a&l¡Bienvenid@ de nuevo a Corum, {PLAYER}!"
+
+# Enlace del webhook
+webhook-url: "https://example.com"
