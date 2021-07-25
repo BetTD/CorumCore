@@ -1,6 +1,6 @@
 name: CorumCore
 authors: [NotEugenio_, BetTD]
-version: 1.2.1
+version: 1.3.0
 main: wtf.eugenio.corumcore.CorumCore
 depend: [PlaceholderAPI, TitleManager]
 commands:
