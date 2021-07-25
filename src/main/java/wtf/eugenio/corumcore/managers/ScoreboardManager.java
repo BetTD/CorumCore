@@ -28,6 +28,9 @@ public class ScoreboardManager {
         for (int i = 1; i < scoreboard(p).size(); i++) {
             tm.setScoreboardValue(p, i, ChatColor.translateAlternateColorCodes('&', scoreboard(p).get(i)));
         }
+        for (int i = scoreboard(p).size(); i <= 15; i++) {
+            tm.removeScoreboardValue(p, i);
+        }
     }
 
     private static HashMap<Integer, String> scoreboard(Player p) {
