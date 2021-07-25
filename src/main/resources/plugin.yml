@@ -1,8 +1,8 @@
 name: CorumCore
-author: Corum
+authors: [NotEugenio_, BetTD]
 version: 1.2.1
 main: wtf.eugenio.corumcore.CorumCore
-depend: [PlaceholderAPI]
+depend: [PlaceholderAPI, TitleManager]
 commands:
   cc:
   vidas:

@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.MetadataValue;
+import wtf.eugenio.corumcore.managers.ScoreboardManager;
 
 public class EventListener implements Listener {
     // No debería dejar así el código, debería poner un caso else para que no envíe el mensaje si está en vanish, pero
@@ -22,6 +23,8 @@ public class EventListener implements Listener {
         motd.append(CorumCore.getInstance().getSettings().joinMotd.replace("{PLAYER}", p.getName()));
 
         Bukkit.getScheduler().runTaskLater(CorumCore.getInstance(), () -> p.sendMessage(motd.toString()), 20L);
+
+        ScoreboardManager.setScoreboard(p);
     }
 
     // Mensajes movidos a wtf.eugenio.corumcore.config.Settings -- Eugenio
@@ -33,7 +36,7 @@ public class EventListener implements Listener {
 
     // Code from https://www.spigotmc.org/resources/supervanish-be-invisible.1331/
     // Simple dependency-less method to check if a player is vanished, works with SuperVanish, PremiumVanish, VanishNoPacket, etc...
-    private boolean isVanished(Player player) {
+    public static boolean isVanished(Player player) {
         for (MetadataValue meta : player.getMetadata("vanished")) if (meta.asBoolean()) return true;
         return false;
     }

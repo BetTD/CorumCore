@@ -14,8 +14,12 @@ joinleave:
   join-motd-newlines: 10
   join-motd-message: "&a&l¡Bienvenid@ de nuevo a Corum, {PLAYER}!"
 
-# Enlace del webhook
-webhook-url: "https://example.com"
+# Configuración del webhook
+webhook:
+  webhook-enabled: true
+  webhook-username: "Corum"
+  webhook-avatar: "https://static.5sm.online/ejemplo.jpg"
+  webhook-url: "https://example.com"
 
 # Desafío
 challenge:

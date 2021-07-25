@@ -8,6 +8,7 @@ import wtf.eugenio.corumcore.commands.VidasCommand;
 import wtf.eugenio.corumcore.config.Settings;
 import wtf.eugenio.corumcore.managers.CountdownManager;
 import wtf.eugenio.corumcore.managers.DiscordManager;
+import wtf.eugenio.corumcore.managers.ScoreboardManager;
 import wtf.eugenio.corumcore.managers.VidasManager;
 import wtf.eugenio.corumcore.placeholder.CorumPlaceholder;
 
@@ -40,11 +41,13 @@ public class CorumCore extends JavaPlugin {
             CountdownManager.startCosmeticCountdown();
         }
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(this, DiscordManager::sendStartWebhook);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(CorumCore.getInstance(), ScoreboardManager::updateScoreboardForEveryone, 0L, 20L);
+
+        if (getSettings().webhookEnabled) Bukkit.getScheduler().scheduleSyncDelayedTask(this, DiscordManager::sendStartWebhook);
     }
 
     public void onDisable() {
-        DiscordManager.sendStoppingWebhook();
+        if (getSettings().webhookEnabled) DiscordManager.sendStoppingWebhook();
     }
 
     private void registerStuff() {

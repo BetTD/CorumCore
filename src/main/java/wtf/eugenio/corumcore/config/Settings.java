@@ -15,6 +15,9 @@ public class Settings {
     // *------*
     public List<String> challenge;
     // *------*
+    public boolean webhookEnabled;
+    public String webhookUsername;
+    public String webhookAvatar;
     public String webhookURL;
 
     public void initializeMessages() {
@@ -26,6 +29,9 @@ public class Settings {
         // *------*
         challenge = CorumCore.getInstance().getConfig().getStringList("challenge");
         // *------*
-        webhookURL = CorumCore.getInstance().getConfig().getString("webhook-url");
+        webhookEnabled = CorumCore.getInstance().getConfig().getBoolean("webhook.webhook-enabled");
+        webhookUsername = CorumCore.getInstance().getConfig().getString("webhook.webhook-username");
+        webhookAvatar = CorumCore.getInstance().getConfig().getString("webhook.webhook-avatar");
+        webhookURL = CorumCore.getInstance().getConfig().getString("webhook.webhook-url");
     }
 }

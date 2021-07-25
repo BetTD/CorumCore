@@ -24,7 +24,6 @@ public class CorumPlaceholder extends PlaceholderExpansion {
         switch (params) {
             case "desafio":
                 if (VidasManager.undoneChallenges.contains(player.getPlayer().getName())) {
-                    System.out.println(CorumCore.getInstance().getSettings().challenge);
                     StringBuilder challenge = new StringBuilder();
                     for (String string : CorumCore.getInstance().getSettings().challenge) {
                         challenge.append(string).append("\n");

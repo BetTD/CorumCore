@@ -4,8 +4,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import wtf.eugenio.corumcore.CorumCore;
 import wtf.eugenio.corumcore.managers.CountdownManager;
+import wtf.eugenio.corumcore.managers.ScoreboardManager;
 import wtf.eugenio.corumcore.managers.VidasManager;
 
 import java.util.Date;
@@ -72,6 +74,9 @@ public class CCCommand implements CommandExecutor {
                     } else {
                         sender.sendMessage("§e§lUSO:§f /cc ajustarcountdown <fecha>" + "\n" + "§7§oFormato: dd/MM/yyyy HH:mm");
                     }
+                    break;
+                case "setscore":
+                    ScoreboardManager.setScoreboard((Player) sender);
                     break;
                 case "reload":
                 case "recargar":
