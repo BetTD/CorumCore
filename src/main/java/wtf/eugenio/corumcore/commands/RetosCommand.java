@@ -22,7 +22,7 @@ public class RetosCommand implements CommandExecutor {
         for (String s : CorumCore.getInstance().getSettings().challenge) {
             desafio.append(s).append("\n");
         }
-        msg.append("&f&lDESAFÍO DIARIO DE HOY").append("\n");
+        msg.append("&8&m       &r &f&lDESAFÍO DIARIO DE HOY&r &8&m       &r").append("\n");
         Object remainingTime = CountdownManager.getRemainingTime(true);
         if (!remainingTime.equals(false)) {
 
@@ -32,13 +32,14 @@ public class RetosCommand implements CommandExecutor {
             }
         } else {
             if (args.length > 0 && args[0].equals("antiguo")) {
-                msg.append("Este es el desafío que ha habido hasta ahora:")
-                        .append("\n");
+                msg.append("&7Este es el desafío que ha habido hasta ahora:")
+                        .append("\n")
+                        .append(desafio);
 
             } else {
-                msg.append("&c¡Ya ha acabado el desafío! &7Pronto anunciaremos otro reto. Si quieres ver el desafío que había hasta ahora, haz &l/")
+                msg.append("&c¡Ya ha acabado el desafío! &7Pronto anunciaremos otro reto. Si quieres ver el desafío que había hasta ahora, haz &f&l/")
                         .append(label)
-                        .append("antiguo&7.");
+                        .append(" antiguo&7.");
             }
         }
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg.toString()));
