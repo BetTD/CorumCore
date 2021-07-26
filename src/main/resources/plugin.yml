@@ -16,6 +16,9 @@ commands:
     description: Cambiar modo de juego
     aliases: [gm, gmc, gms, gma, gmsp]
     permission: corum.gamemode
+  retos:
+    description: Visualiza los retos actuales, así como el estado del mismo
+    aliases: [challenge, challenges, desafio, desafios, reto]
 permissions:
   corum.*:
     description: Absolutamente todo
