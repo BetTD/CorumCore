@@ -18,7 +18,7 @@ public class CountdownManager {
     public static void startCosmeticCountdown() {
         taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(CorumCore.getInstance(), () -> {
             Object remainingTime = getRemainingTime(false);
-            if (!remainingTime.equals(false)) sendActionCountdown("§e§lSiguiente desafío:§r " + (String) remainingTime);
+            if (!remainingTime.equals(false)) sendActionCountdown("§e§lSiguiente desafío:§r " + remainingTime);
             else sendActionCountdown("§e§l¡Desafío terminado!§6 Pronto se anunciará otro desafío.");
         }, 0L, 20L);
     }
