@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import wtf.eugenio.corumcore.commands.CCCommand;
+import wtf.eugenio.corumcore.commands.GamemodeCommand;
 import wtf.eugenio.corumcore.commands.VidasCommand;
 import wtf.eugenio.corumcore.config.Settings;
 import wtf.eugenio.corumcore.managers.CountdownManager;
@@ -53,6 +54,7 @@ public class CorumCore extends JavaPlugin {
     private void registerStuff() {
         getCommand("cc").setExecutor(new CCCommand());
         getCommand("vidas").setExecutor(new VidasCommand());
+        getCommand("gamemode").setExecutor(new GamemodeCommand());
         getServer().getPluginManager().registerEvents(new EventListener(), this);
     }
 }
