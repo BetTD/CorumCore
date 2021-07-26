@@ -8,7 +8,6 @@ import wtf.eugenio.corumcore.CorumCore;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 public class CountdownManager {
@@ -19,7 +18,7 @@ public class CountdownManager {
     public static void startCosmeticCountdown() {
         taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(CorumCore.getInstance(), () -> {
             Object remainingTime = getRemainingTime(false);
-            if (!remainingTime.equals(false)) sendActionCountdown((String) remainingTime);
+            if (!remainingTime.equals(false)) sendActionCountdown("§e§lSiguiente desafío:§r " + (String) remainingTime);
             else sendActionCountdown("§e§l¡Desafío terminado!§6 Pronto se anunciará otro desafío.");
         }, 0L, 20L);
     }
@@ -48,10 +47,10 @@ public class CountdownManager {
 
     public static Object getRemainingTime(boolean readable) {
         long diff = countdownlimit.getTime() - System.currentTimeMillis();
-        int s = (int) TimeUnit.MILLISECONDS.toSeconds(diff);
-        int m = (int) TimeUnit.MILLISECONDS.toMinutes(diff);
-        int h = (int) TimeUnit.MILLISECONDS.toHours(diff);
-        int d = (int) TimeUnit.MILLISECONDS.toDays(diff);
+        int s = (int) (diff / 1000) % 60;
+        int m = (int) ((diff / (1000*60)) % 60);
+        int h = (int) ((diff / (1000*60*60)) % 24);
+        int d = (int) (int) ((diff / (1000*60*60*24)) % 7);
         if (diff > 0) {
             StringBuilder remainingTime = new StringBuilder();
             if (d != 0) remainingTime.append(d).append("día(s), ");
