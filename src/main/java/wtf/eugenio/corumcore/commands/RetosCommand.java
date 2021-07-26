@@ -29,6 +29,8 @@ public class RetosCommand implements CommandExecutor {
             msg.append(desafio).append("\n");
             if (VidasManager.undoneChallenges.contains(((Player) sender).getPlayer().getName())) {
                 msg.append("&eTe quedan ").append((String) remainingTime).append(" para completar el desafío.");
+            } else {
+                msg.append("&a¡Ya has completado el desafío!");
             }
         } else {
             if (args.length > 0 && args[0].equals("antiguo")) {
